@@ -28,6 +28,12 @@ module.exports = withStoreConfig({
         protocol: "https",
         hostname: "medusa-server-testing.s3.us-east-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "kc-products.s3.us-west-1.amazonaws.com",
+        port: "",
+        pathname: "/kc-product-images/Product+Images/**",
+      },
     ],
   },
 })

@@ -40,6 +40,14 @@ export type PrefetchedPageProps = {
 }
 
 // For pages with nested layouts
+export type CategoryPreviewType = {
+  title: string
+  handle: string | null
+  size?: "small" | "medium" | "large" | "full" | "square"
+  isFeatured?: boolean
+  className?: string
+}
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout: (page: ReactElement) => ReactNode
 }

@@ -1,6 +1,17 @@
+/* Global CSS: Example from https://github.com/medusajs/nextjs-starter-medusa/blob/main/src/styles/globals.css */
+
+@import url("https://use.typekit.net/sbf8zhe.css");
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+  html,
+  body {
+      background-color: #F7F4F2;
+  }
+}
 
 @layer utilities {
   /* Chrome, Safari and Opera */
@@ -13,6 +24,15 @@
   }
 
   .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hide-scroll-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scroll-bar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
@@ -35,9 +55,10 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    border: 1px solid #212121;
-    -webkit-text-fill-color: #212121;
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    /* border: 1px solid #212121; */
+    /* -webkit-text-fill-color: #212121; */
+    /* -webkit-box-shadow: 0 0 0px 1000px #fff inset; */
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 
@@ -47,9 +68,390 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
+
+  /* Remove input and textbox borders */
+  input:focus,
+  textarea:focus {
+    @apply outline-none;
+  }
 }
 
 @layer components {
+  /* General Typography Format:     
+  [tag 1]-[link?]-[platform]-[font weight]-[font style 1?]-[font style 2?]
+  */
+
+  /* Mobile Typography Styles */
+  /* Displays styles */
+
+  .h1-mobile-regular {
+    @apply text-[2.5rem] leading-[3rem] font-optima
+  }
+
+  .h2-mobile-regular {
+    @apply text-[2rem] leading-[2.5rem] font-optima
+  }
+
+  .h3-mobile-regular {
+    @apply text-[1.25rem] leading-[1.5rem] font-optima
+  }
+
+  /* Headline styles */
+  .h4-mobile-regular {
+    @apply text-[1.25rem] leading-[1.5rem]
+  }
+
+  .h4-mobile-semi {
+    @apply text-[1.25rem] leading-[1.5rem] font-semibold
+  }
+
+  .h4-mobile-bold {
+    @apply text-[1.25rem] leading-[1.5rem] font-bold
+  }
+
+  .h5-mobile-regular {
+    @apply text-[1rem] leading-[1.25rem]
+  }
+
+  .h5-mobile-semi {
+    @apply text-[1rem] leading-[1.25rem] font-semibold
+  }
+
+  .h5-mobile-bold {
+    @apply text-[1rem] leading-[1.25rem] font-bold
+  }
+
+  .h6-mobile-regular {
+    @apply text-[0.75rem] leading-[1rem] 
+  }
+
+  .h6-mobile-semi {
+    @apply text-[0.75rem] leading-[1rem] font-semibold
+  }
+
+  .h6-mobile-bold {
+    @apply text-[0.75rem] leading-[1rem] font-bold
+  }
+
+  /* Text styles */
+  .p1-mobile-light {
+    @apply text-[0.75rem] leading-[1rem] font-light
+  }
+
+  .p1-mobile-regular {
+    @apply text-[0.75rem] leading-[1rem] 
+  }
+
+  .p1-mobile-semi {
+    @apply text-[0.75rem] leading-[1rem] font-semibold
+  }
+
+  .p1-link-mobile-light {
+    @apply text-[0.75rem] leading-[1rem] font-light underline
+  }
+
+  .p1-link-mobile-regular {
+    @apply text-[0.75rem] leading-[1rem] underline
+  }
+
+  .p1-link-mobile-semi {
+    @apply text-[0.75rem] leading-[1rem] font-semibold underline
+  }
+
+  .text-mobile-light-italic {
+    @apply text-[0.75rem] leading-[1rem] font-light italic
+  }
+
+  .text-mobile-regular-italic {
+    @apply text-[0.75rem] leading-[1rem] italic
+  }
+
+  .text-mobile-semi-italic {
+    @apply text-[0.75rem] leading-[1rem] font-semibold italic
+  }
+
+  .text-link-mobile-light-italic {
+    @apply text-[0.75rem] leading-[1rem] font-light italic underline
+  }
+
+  .text-link-mobile-regular-italic {
+    @apply text-[0.75rem] leading-[1rem] italic underline
+  }
+
+  .text-link-mobile-semi-italic {
+    @apply text-[0.75rem] leading-[1rem]  italic font-semibold underline
+  }
+
+  .p2-mobile-light {
+    @apply text-[0.625rem] leading-[0.75rem] font-light
+  }
+
+  .p2-mobile-regular {
+    @apply text-[0.625rem] leading-[0.75rem] 
+  }
+
+  .p2-mobile-semi {
+    @apply text-[0.625rem] leading-[0.75rem] font-semibold
+  }
+
+  .caption1-mobile-light-italic {
+    @apply text-[0.625rem] leading-[0.75rem] font-light italic
+  }
+
+  .caption1-mobile-regular-italic {
+    @apply text-[0.625rem] leading-[0.75rem] italic
+  }
+
+  .caption1-mobile-semi-italic {
+    @apply text-[0.625rem] leading-[0.75rem] font-semibold italic
+  }
+
+  .caption1-link-mobile-light-italic {
+    @apply text-[0.625rem] leading-[0.75rem] font-light italic underline
+  }
+
+  .caption1-link-mobile-regular-italic {
+    @apply text-[0.625rem] leading-[0.75rem] italic underline
+  }
+
+  .caption1-link-mobile-semi-italic {
+    @apply text-[0.625rem] leading-[0.75rem] font-semibold italic underline
+  }
+
+  .caption2-mobile-regular {
+    @apply text-[0.625rem] leading-[0.75rem] tracking-wide uppercase
+  }
+
+  .caption2-mobile-semi {
+    @apply text-[0.625rem] leading-[0.75rem] font-semibold tracking-wide uppercase
+  }
+  
+  .caption2-mobile-bold {
+    @apply text-[0.625rem] leading-[0.75rem] font-bold tracking-wide uppercase
+  }
+  
+  .caption2-mobile-extrabold {
+    @apply text-[0.625rem] leading-[0.75rem] font-extrabold tracking-wide uppercase
+  }
+
+  .caption2-link-mobile-bold {
+    @apply text-[0.625rem] leading-[0.75rem] font-bold underline tracking-wide uppercase
+  }
+
+  .micro-mobile-regular {
+    @apply text-[0.5rem] leading-[0.75rem] tracking-wide uppercase
+  }
+
+  .micro-mobile-semi {
+    @apply text-[0.5rem] leading-[0.75rem] font-semibold tracking-wide uppercase
+  }
+
+  .micro-mobile-bold {
+    @apply text-[0.5rem] leading-[0.75rem]  font-bold tracking-wide uppercase
+  }
+
+  /* Desktop typography styles */
+  /* Display styles */
+  .h1-desktop-regular {
+    @apply text-[4.5rem] leading-[5.25rem] font-optima
+  }
+
+  .h2-desktop-regular {
+    @apply text-[3.1875rem] leading-[4.25rem] font-optima
+  }
+
+  .h3-desktop-regular {
+    @apply text-[2.25rem] leading-[3rem] font-optima
+  }
+
+  /* Headline styles */
+  .h4-desktop-regular {
+    @apply text-[2.25rem] leading-[3rem]
+  }
+
+  .h4-desktop-semi {
+    @apply text-[2.25rem] leading-[3rem] font-semibold
+  }
+
+  .h4-desktop-bold {
+    @apply text-[2.25rem] leading-[3rem] font-bold
+  }
+
+  .h5-desktop-regular {
+    @apply text-[1.5625rem] leading-[2rem]
+  }
+
+  .h5-desktop-semi {
+    @apply text-[1.5625rem] leading-[2rem] font-semibold
+  }
+
+  .h5-desktop-bold {
+    @apply text-[1.5625rem] leading-[2rem] font-bold
+  }
+
+  .h6-desktop-regular {
+    @apply text-[1.125rem] leading-[1.5rem]
+  }
+
+  .h6-desktop-semi {
+    @apply text-[1.125rem] leading-[1.5rem] font-semibold
+  }
+
+  .h6-desktop-bold {
+    @apply text-[1.125rem] leading-[1.5rem] font-bold
+  }
+
+  /* Text styles */
+  .p1-desktop-light {
+    @apply text-[1.125rem] leading-[1.5rem] font-light
+  }
+
+  .p1-desktop-regular {
+    @apply text-[1.125rem] leading-[1.5rem]
+  }
+
+  .p1-desktop-semi {
+    @apply text-[1.125rem] leading-[1.5rem] font-semibold
+  }
+
+  .p1-link-desktop-light {
+    @apply text-[1.125rem] leading-[1.5rem] font-light underline
+  }
+
+  .p1-link-desktop-regular {
+    @apply text-[1.125rem] leading-[1.5rem] underline
+  }
+
+  .p1-link-desktop-semi {
+    @apply text-[1.125rem] leading-[1.5rem] font-semibold underline
+  }
+
+  .text-desktop-light-italic {
+    @apply text-[1.125rem] leading-[1.5rem] font-light italic
+  }
+
+  .text-desktop-regular-italic {
+    @apply text-[1.125rem] leading-[1.5rem] italic
+  }
+
+  .text-desktop-semi-italic {
+    @apply text-[1.125rem] leading-[1.5rem] font-semibold italic
+  }
+
+  .text-link-desktop-light-italic {
+    @apply text-[1.125rem] leading-[1.5rem] font-light italic underline
+  }
+
+  .text-link-desktop-regular-italic {
+    @apply text-[1.125rem] leading-[1.5rem] italic underline
+  }
+
+  .text-link-desktop-semi-italic {
+    @apply text-[1.125rem] leading-[1.5rem] italic font-semibold underline
+  }
+
+  .p2-desktop-light {
+    @apply text-[0.875rem] leading-[1.5rem] font-light
+  }
+
+  .p2-desktop-regular {
+    @apply text-[0.875rem] leading-[1.5rem]
+  }
+
+  .p2-desktop-semi {
+    @apply text-[0.875rem] leading-[1.5rem] font-semibold
+  }
+
+  .caption1-desktop-light-italic {
+    @apply text-[0.875rem] leading-[1.5rem] font-light italic
+  }
+
+  .caption1-desktop-regular-italic {
+    @apply text-[0.875rem] leading-[1.5rem] italic
+  }
+
+  .caption1-desktop-semi-italic {
+    @apply text-[0.875rem] leading-[1.5rem] font-semibold italic
+  }
+
+  .caption1-link-desktop-light-italic {
+    @apply text-[0.875rem] leading-[1.5rem] font-light italic underline
+  }
+
+  .caption1-link-desktop-regular-italic {
+    @apply text-[0.875rem] leading-[1.5rem] italic underline
+  }
+
+  .caption1-link-desktop-semi-italic {
+    @apply text-[0.875rem] leading-[1.5rem] font-semibold italic underline
+  }
+
+  .caption2-desktop-regular {
+    @apply text-[0.875rem] leading-[1.5rem] tracking-wide uppercase
+  }
+
+  .caption2-desktop-semi {
+    @apply text-[0.875rem] leading-[1.5rem] font-semibold tracking-wide uppercase
+  }
+  
+  .caption2-desktop-bold {
+    @apply text-[0.875rem] leading-[1.5rem] font-bold tracking-wide uppercase
+  }
+
+  .caption2-link-desktop-bold {
+    @apply text-[0.875rem] leading-[1.5rem] font-bold underline tracking-wide uppercase
+  }
+
+  .micro-desktop-regular {
+    @apply text-[0.625rem] leading-[1rem] tracking-wide uppercase
+  }
+
+  .micro-desktop-semi {
+    @apply text-[0.625rem] leading-[1rem] font-semibold tracking-wide uppercase
+  }
+
+  .micro-desktop-bold {
+    @apply text-[0.625rem] leading-[1rem] font-bold tracking-wide uppercase
+  }
+
+  .loading {
+    @apply p-4 min-h-100v
+  }
+
+
+  /* Prevent scrolling in the background when a modal is open */
+  .no-scroll,
+  .no-scroll body {
+    overflow: hidden;
+    width: 100%; /* To prevent layout shift when scrollbar disappears */
+  }
+
+  /* Custom styles for Google Places Autocomplete */
+  /* .pac-container {
+    @apply border border-red-300 shadow-lg rounded-lg bg-red-200;
+  } */
+  
+  .pac-container {
+    @apply pt-4 border-0 shadow-none bg-transparent;
+  }
+  
+  .pac-item {
+    @apply p-2 cursor-pointer text-left;
+  }
+  
+  .pac-item:hover {
+    @apply bg-blue-600;
+  }
+  
+  .pac-item-query {
+    @apply font-bold;
+  }
+  
+  .pac-icon {
+    @apply w-5 h-5 mr-2;
+  }
+
+  /* Examples */
   .content-container {
     @apply max-w-[1440px] w-full mx-auto px-4;
   }

@@ -13,19 +13,19 @@ const ProductPreview = ({
 }: ProductPreviewType) => (
   <Link href={`/products/${handle}`} className="group">
     <div>
-      <Thumbnail thumbnail={thumbnail} size="full" isFeatured={isFeatured} />
-      <div className="flex txt-compact-medium mt-4 justify-between">
-        <Text className="text-ui-fg-subtle">{title}</Text>
+      <Thumbnail thumbnail={thumbnail} size="square" isFeatured={isFeatured} />
+      <div className="flex flex-col gap-1 txt-compact-medium mt-1.5 justify-between">
+        <Text className="text-ui-fg-subtle h6-mobile-semi capitalize xsmall:h6-desktop-semi">{title}</Text>
         <div className="flex items-center gap-x-2">
           {price ? (
             <>
               {price.price_type === "sale" && (
-                <Text className="line-through text-ui-fg-muted">
+                <Text className="p1-mobile-light line-through text-ui-fg-muted xsmall:p1-desktop-light">
                   {price.original_price}
                 </Text>
               )}
               <Text
-                className={clsx("text-ui-fg-muted", {
+                className={clsx("p1-mobile-light text-ui-fg-muted", {
                   "text-ui-fg-interactive": price.price_type === "sale",
                 })}
               >

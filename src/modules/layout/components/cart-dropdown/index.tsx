@@ -10,21 +10,34 @@ import Thumbnail from "@modules/products/components/thumbnail"
 import { formatAmount, useCart } from "medusa-react"
 import Link from "next/link"
 import { Fragment } from "react"
+import { useRouter } from "next/navigation";
+import ShoppingBag from "@modules/common/icons/shopping-bag"
 
 const CartDropdown = () => {
   const { cart, totalItems } = useCart()
   const items = useEnrichedLineItems()
+  const router = useRouter();
   const { deleteItem } = useStore()
   const { state, open, close } = useCartDropdown()
 
   return (
     <div className="h-full z-50" onMouseEnter={open} onMouseLeave={close}>
-      <Popover className="relative h-full">
+      <Popover className="relative h-full flex items-center">
         <Popover.Button className="h-full">
           <Link
-            className="hover:text-ui-fg-base"
-            href="/cart"
-          >{`Cart (${totalItems})`}</Link>
+            className="relative w-[20px] h-[20px] flex items-center"
+            href="/shopping-bag"
+          >
+            <ShoppingBag
+              fill={totalItems > 0 ? "#E0DAD7" : "transparent"}
+              stroke="#E0DAD7"
+              strokeWidth={totalItems > 0 ? "2" : "1"}
+              className="shrink-0"
+            />
+            {totalItems > 0 && (
+              <p className="absolute inset-0 translate-y-[3px] flex justify-center items-center p2-mobile-semi">{totalItems}</p>
+            )}
+          </Link>
         </Popover.Button>
         <Transition
           show={state}
@@ -38,6 +51,7 @@ const CartDropdown = () => {
         >
           <Popover.Panel
             static
+            // className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[382px] text-gray-900"
             className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[382px] text-gray-900"
           >
             <div className="p-4 flex items-center justify-center">

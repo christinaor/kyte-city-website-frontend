@@ -10,24 +10,30 @@ const ProductRail = ({ collection }: { collection: ProductCollection }) => {
   const { data } = useFeaturedProductsQuery(collection.id)
 
   return (
-    <div className="small:py-12">
-      <div className="content-container py-12">
-        <div className="flex justify-between mb-8">
-          <Text className="txt-xlarge">{collection.title}</Text>
-          <InteractiveLink href={`/collections/${collection.handle}`}>
-            View all
-          </InteractiveLink>
+    // <div className="max-w-[1440px] w-full mx-auto py-6 border-b border-b-solid border-b-neutral-5">
+    // <div>
+    <>
+      {(data ?? []).length > 0 && (
+        <div className="max-w-[1440px] w-full mx-auto py-6 border-b border-b-solid border-b-neutral-5 flex flex-col gap-4 xsmall:py-10">
+          <div className="flex justify-between">
+            <Text className="h4-mobile-semi text-main-1 capitalize xsmall:h4-desktop-semi">{collection.title}</Text>
+            <InteractiveLink href={`/collections/${collection.handle}`}>
+              View all
+            </InteractiveLink>
+          </div>
+
+          <ul className="grid grid-cols-2 xsmall:grid-cols-3 small:grid-cols-4 gap-x-6 gap-y-4">
+            {data &&
+              data.map((product) => (
+                <li key={product.id}>
+                  <ProductPreview isFeatured {...product} />
+                </li>
+              ))}
+          </ul>
         </div>
-        <ul className="grid grid-cols-2 small:grid-cols-3 gap-x-6 gap-y-8">
-          {data &&
-            data.map((product) => (
-              <li key={product.id}>
-                <ProductPreview isFeatured {...product} />
-              </li>
-            ))}
-        </ul>
-      </div>
-    </div>
+      )}
+    </>
+    // </div>
   )
 }
 

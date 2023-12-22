@@ -2,6 +2,7 @@ const path = require("path")
 
 module.exports = {
   presets: [require("@medusajs/ui-preset")],
+  important: true,
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx}",
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -20,6 +21,43 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+        "main-1": "#242831",
+        "main-2": "#E0DAD7",
+        "main-3": "#CCD0D8",
+        "primary-1": "#F0F5FF",
+        "primary-2": "#99B5F0",
+        "primary-3": "#557BCE",
+        "primary-4": "#3D527F",
+        "primary-5": "#242831",
+        "secondary-1": "#F7F4F2",
+        "secondary-2": "#E0DAD7",
+        "secondary-3": "#C7C0BD",
+        "secondary-4": "#ABA7A6",
+        "secondary-5": "#787473",
+        "neutral-1": "#F5F7FA",
+        "neutral-2": "#E6E9EF",
+        "neutral-3": "#CCD0D8",
+        "neutral-4": "#A4A9B2",
+        "neutral-5": "#818488",
+        "error-1": "#FFF1F0",
+        "error-2": "#F09D98",
+        "error-3": "#CE5C55",
+        "error-4": "#7F413D",
+        "error-5": "#462C2A",
+        "warning-1": "#FFFBF0",
+        "warning-2": "#F1DD98",
+        "warning-3": "#CFB454",
+        "warning-4": "#80713C",
+        "warning-5": "#413D2F",
+        "success-1": "#F1FEF4",
+        "success-2": "#9BEDB2",
+        "success-3": "#5BC879",
+        "success-4": "#427B52",
+        "success-5": "#323E36",
+        "temp-category-0": "#CCD0D8",
+        "temp-category-1": "#E6E9EF",
+        "temp-category-2": "#A4A9B2",
+        "temp-category-3": "#CCD0D8",
         grey: {
           0: "#FFFFFF",
           5: "#F9FAFB",
@@ -45,8 +83,16 @@ module.exports = {
       maxWidth: {
         "8xl": "100rem",
       },
+      minHeight: {
+        "50v": "50vh",
+        "60v": "60vh",
+        "70v": "70vh",
+        "80v": "80vh",
+        "90v": "90vh",
+        "100v": "100vh",
+      },
       screens: {
-        "2xsmall": "320px",
+        "2xsmall": "360px",
         xsmall: "512px",
         small: "1024px",
         medium: "1280px",
@@ -55,6 +101,8 @@ module.exports = {
         "2xlarge": "1920px",
       },
       fontSize: {
+        "xxxs": "0.375rem",
+        "xxs": "0.5rem",
         "3xl": "2rem",
       },
       fontFamily: {
@@ -66,6 +114,14 @@ module.exports = {
           "Roboto",
           "Helvetica Neue",
           "Ubuntu",
+          "sans-serif",
+        ],
+        optima: [
+          "Optima",
+          "sans-serif",
+        ],
+        muli: [
+          "Muli",
           "sans-serif",
         ],
       },
@@ -156,6 +212,9 @@ module.exports = {
         leave: "leave 150ms ease-in forwards",
       },
     },
+  },
+  variants: {
+    extend: {},
   },
   plugins: [require("tailwindcss-radix")()],
 }
