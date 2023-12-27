@@ -34,9 +34,8 @@ const Nav = () => {
       {pathname === "/" && (
         <Hero />
       )}
-      <div className="absolute top-0 inset-x-0 z-50 px-4 py-3">
-        <nav className="flex items-center justify-between w-full h-full">
-          {/* <div className="flex-1 basis-0 h-[20px] flex items-center gap-x-4"> */}
+      <div className={`absolute top-0 inset-x-0 z-50 ${pathname === "/" ? "bg-transparent" : "bg-primary-5"}`}>
+        <nav className="flex items-center justify-between w-full h-full px-4 py-3">
           <div className="flex-1 basis-0 flex items-center gap-x-4">
             <div className="block small:hidden">
               <Hamburger setOpen={toggle} />

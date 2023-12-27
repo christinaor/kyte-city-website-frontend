@@ -8,7 +8,7 @@ const Hero = () => {
   const router = useRouter();
 
   return (
-    <div className="h-[60vh] w-full relative bg-ui-bg-subtle xsmall:h-[40vh]">
+    <div className="relative h-[60vh] w-full bg-ui-bg-subtle xsmall:h-[40vh]">
       <div className="absolute inset-0">
         <Image
           src="/images/hero.jpg"
