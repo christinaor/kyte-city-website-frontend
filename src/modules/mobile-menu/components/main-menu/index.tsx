@@ -1,27 +1,29 @@
+import { useAccount } from "@lib/context/account-context"
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import { useStore } from "@lib/context/store-context"
-import useCountryOptions from "@lib/hooks/use-country-options"
-import ChevronDown from "@modules/common/icons/chevron-down"
+// import { useStore } from "@lib/context/store-context"
+// import useCountryOptions from "@lib/hooks/use-country-options"
+// import ChevronDown from "@modules/common/icons/chevron-down"
 import { MagnifyingGlassMini, XMark as X } from "@medusajs/icons"
 import { useCollections, useMeCustomer, useProductCategories } from "medusa-react"
-import { ProductCategory } from "@medusajs/medusa"
+// import { ProductCategory } from "@medusajs/medusa"
 import Link from "next/link"
-import ReactCountryFlag from "react-country-flag"
-import { Heading } from "@medusajs/ui"
-import { useState } from "react"
 import clsx from "clsx"
-import { useRouter } from "next/navigation"
+// import ReactCountryFlag from "react-country-flag"
+// import { Heading } from "@medusajs/ui"
+import { useState } from "react"
+// import { useRouter } from "next/navigation"
 import MenuBar from "@modules/common/components/menu-bar"
 import MenuLink from "../menu-link"
 
 const MainMenu = () => {
+  const { handleLogout } = useAccount()
   const { collections } = useCollections()
   const { product_categories: categories } = useProductCategories()
   const { customer } = useMeCustomer()
-  const { countryCode } = useStore()
+  // const { countryCode } = useStore()
 
-  const router = useRouter();
-  const countries = useCountryOptions()
+  // const router = useRouter();
+  // const countries = useCountryOptions()
 
   const {
     close,
@@ -30,33 +32,16 @@ const MainMenu = () => {
 
   const [currentCategory, setCurrentCategory] = useState("pharmacy");
 
+  const handleLogoutAndClose = () => {
+    handleLogout()
+    close()
+  }
+
   // const setScreenCountry = () => setScreen("country")
   // const setScreenSearch = () => setScreen("search")
 
   return (
     <div className="flex flex-col flex-1">
-      {/* <div className="flex items-center justify-between w-full border-b border-gray-200 p-6">
-        <div className="flex-1 basis-0">
-          <button
-            className="flex items-center gap-x-2"
-            onClick={setScreenCountry}
-          >
-            <ReactCountryFlag countryCode={countryCode || "us"} svg />
-            <ChevronDown />
-          </button>
-        </div>
-
-        <Heading className="txt-compact-xlarge-plus text-ui-fg-subtle uppercase">
-          Medusa Store
-        </Heading>
-
-        <div className="flex-1 basis-0 flex justify-end">
-          <button onClick={close}>
-            <X />
-          </button>
-        </div>
-      </div> */}
-
       {/* <div className="flex-1 basis-0 flex justify-end"> */}
         <button onClick={close}>
           <X />
@@ -224,76 +209,44 @@ const MainMenu = () => {
         )}
 
         <div className="flex flex-col items-start gap-1 px-4">
-          {/* {customer
-            ? <MenuLink
-              path="/"
-              linkText="logout"
-              handleClick={close}
-            />
-            : <button
-              onClick={close}
-            >
-              <p className="p1-mobile-light capitalize">Sign In</p>
-            </button>
-          } */}
-          
-
-
-
           {!customer ? (
             <div className="flex flex-col gap-y-4 ">
-              {/* <span className="text-gray-700 uppercase">Account</span> */}
               <Link href={`/account/login`} passHref>
                 <button
-                  // className="flex items-center justify-between border-b border-gray-200 py-2 w-full"
                   onClick={close}
                 >
                   <span className="sr-only p1-mobile-light">Go to sign in page</span>
-                  <span className="normal-case p1-mobile-light capitalize">Sign in</span>
-                  {/* <ChevronDown className="-rotate-90" /> */}
+                  <span className="p1-mobile-light capitalize">Sign in</span>
                 </button>
               </Link>
             </div>
           ) : (
-            <div className="flex flex-col gap-y-4">
-              <span className="text-gray-700 uppercase">Signed in as</span>
-              <Link href={`/account`} passHref>
-                <button
-                  className="flex items-center justify-between border-b border-gray-200 py-2 w-full"
-                  onClick={close}
-                >
-                  <span className="sr-only">Go to account page</span>
-                  <span className="normal-case">{customer.email}</span>
-                  <ChevronDown className="-rotate-90" />
-                </button>
-              </Link>
-            </div>
+            <MenuLink
+              path="/"
+              linkText="Logout"
+              handleClick={handleLogoutAndClose}
+            />
           )}
-
           <MenuLink
             path="/about-us"
             linkText="about us"
             handleClick={close}
           />
-
           <MenuLink
             path="/frequently-asked-questions"
             linkText="FAQs"
             handleClick={close}
           />
-
           <MenuLink
             path="/careers"
             linkText="careers"
             handleClick={close}
           />
-
           <MenuLink
             path="/blog"
             linkText="blog"
             handleClick={close}
           />
-
           <MenuLink
             path="/partner-with-us"
             linkText="become a delivery partner"
