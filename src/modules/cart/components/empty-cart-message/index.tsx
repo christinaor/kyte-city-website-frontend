@@ -1,21 +1,32 @@
-import { Heading, Text } from "@medusajs/ui"
-import UnderlineLink from "@modules/common/components/interactive-link"
+import Image from "next/image"
+import Link from "next/link"
 
 const EmptyCartMessage = () => {
   return (
-    <div className="py-48 flex flex-col justify-center items-start">
-      <Heading
-        level="h1"
-        className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
-      >
-        Cart
-      </Heading>
-      <Text className="text-base-regular mt-4 mb-6 max-w-[32rem]">
-        You don&apos;t have anything in your bag. Let&apos;s change that, use
-        the link below to start browsing our products.
-      </Text>
-      <div>
-        <UnderlineLink href="/store">Explore products</UnderlineLink>
+    <div className="flex flex-col max-w-[770px] min-h-60v">
+      <h5 className="py-10 h5-mobile-semi">Shopping Bag</h5>
+      <div className="flex flex-col gap-5 items-center">
+        <div className="flex justify-center items-center p-[10px] pt-[9px] pb-[11px] border border-warning-3 rounded-full bg-warning-3">
+          <Image
+            src="/icons/shopping-bag-solid.svg"
+            alt="empty shopping bag icon"
+            width="40"
+            height="40"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <h5 className="text-warning-3 h5-mobile-semi capitalize">your shopping bag is empty</h5>
+
+          <p className="p1-mobile-light">Looks like you have not added anything to your bag.</p>
+        </div>
+      </div>
+      <div className="flex justify-center gap-4 py-10 xsmall:gap-6">
+        <Link className="flex justify-center items-center px-5 py-1 max-w-[180px] w-full h-[40px] border-solid border-[1px] rounded-sm border-main-1 bg-secondary-1 whitespace-nowrap" href={`/account/login`} passHref>
+          <span className="caption2-mobile-bold uppercase ">sign in</span>
+        </Link>
+        <Link className="flex justify-center items-center px-5 py-1 max-w-[180px] w-full h-[40px] border border-solid border-main-1 rounded-sm caption2-mobile-bold uppercase whitespace-nowrap  bg-main-1 text-main-2" href={`/`}>
+          <span className="caption2-mobile-bold uppercase">continue shopping</span>
+        </Link>
       </div>
     </div>
   )

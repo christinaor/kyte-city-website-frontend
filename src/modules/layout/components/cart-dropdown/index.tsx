@@ -26,7 +26,7 @@ const CartDropdown = () => {
         <Popover.Button className="h-full">
           <Link
             className="relative w-[20px] h-[20px] flex items-center"
-            href="/shopping-bag"
+            href="/cart"
           >
             <ShoppingBag
               fill={totalItems > 0 ? "#E0DAD7" : "transparent"}
