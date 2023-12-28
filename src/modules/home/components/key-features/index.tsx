@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Flash from "@modules/common/icons/flash"
 
-const KeyFeatures: React.FC = () => {
+const KeyFeatures = () => {
   return (
     <section className="flex justify-between items-center gap-10 p-4 min-h-[48px] bg-primary-5 xsmall:px-20 xsmall:py-8">
       <div className="flex items-center gap-2">
