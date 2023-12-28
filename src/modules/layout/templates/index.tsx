@@ -2,11 +2,15 @@ import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import React from "react"
 
-const Layout: React.FC = ({ children }) => {
+const Layout = ({ 
+  children
+ }: {
+  children: React.ReactNode
+ }) => {
   return (
     <div>
       <Nav />
-      <main className="relative">{children}</main>
+      {children}
       <Footer />
     </div>
   )
