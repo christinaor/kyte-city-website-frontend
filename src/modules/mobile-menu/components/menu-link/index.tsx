@@ -14,6 +14,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   return (
     <button onClick={handleClick}>
       <Link href={path}>
+        <p className="sr-only">{`Go to ${linkText} page`}</p>
         <p className="p1-mobile-light capitalize">{linkText}</p>
       </Link>
     </button>
