@@ -12,7 +12,6 @@ const FooterIcons: React.FC = () => {
   ) 
   ? "-light"
   : ""
-  console.log(useLightPath)
   
   return (
     <div className="flex gap-4">
