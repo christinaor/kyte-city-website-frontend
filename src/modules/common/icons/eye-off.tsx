@@ -2,7 +2,7 @@ import React from "react"
 import { IconProps } from "types/icon"
 
 const EyeOff: React.FC<IconProps> = ({
-  size = "20",
+  size = "16",
   color = "currentColor",
   ...attributes
 }) => {
