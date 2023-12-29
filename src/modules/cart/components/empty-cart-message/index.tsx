@@ -16,7 +16,6 @@ const EmptyCartMessage = () => {
         </div>
         <div className="flex flex-col items-center gap-1">
           <h5 className="text-warning-3 h5-mobile-semi capitalize">your shopping bag is empty</h5>
-
           <p className="p1-mobile-light">Looks like you have not added anything to your bag.</p>
         </div>
       </div>

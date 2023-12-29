@@ -1,13 +1,10 @@
 import { useStore } from "@lib/context/store-context"
 import { LineItem, Region } from "@medusajs/medusa"
-import { Table, Text, clx } from "@medusajs/ui"
-import LineItemOptions from "@modules/common/components/line-item-options"
-import LineItemPrice from "@modules/common/components/line-item-price"
+import { clx } from "@medusajs/ui"
 import LineItemUnitPrice from "@modules/common/components/line-item-unit-price"
-import CartItemSelect from "@modules/cart/components/cart-item-select"
-import Trash from "@modules/common/icons/trash"
 import Thumbnail from "@modules/products/components/thumbnail"
 import Link from "next/link"
+import Image from "next/image"
 
 type ItemProps = {
   item: Omit<LineItem, "beforeInsert">
@@ -20,88 +17,51 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
   const { handle } = item.variant.product
 
   return (
-    <Table.Row className="w-full">
-      <Table.Cell className="!pl-0 p-4 w-24">
+    <div className="flex justify-between gap-4 w-full">
+      <div className="flex gap-4 w-full">
         <Link
           href={`/products/${handle}`}
           className={clx("flex", {
-            "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
+            "w-20": type === "preview",
+            "xsmall:w-20 w-16": type === "full",
           })}
         >
           <Thumbnail thumbnail={item.thumbnail} size="square" />
         </Link>
-      </Table.Cell>
-
-      <Table.Cell className="text-left">
-        <Text className="txt-medium-plus text-ui-fg-base">{item.title}</Text>
-        <LineItemOptions variant={item.variant} />
-      </Table.Cell>
-
-      {type === "full" && (
-        <Table.Cell>
-          <div className="flex gap-2">
-            <button
-              className="flex items-center gap-x-"
-              onClick={() => deleteItem(item.id)}
-            >
-              <Trash size={18} />
-            </button>
-            <CartItemSelect
-              value={item.quantity}
-              onChange={(value) =>
-                updateItem({
-                  lineId: item.id,
-                  quantity: parseInt(value.target.value),
-                })
-              }
-              className="w-14 h-10 p-4"
-            >
-              {Array.from(
-                [
-                  ...Array(
-                    item.variant.inventory_quantity > 0
-                      ? item.variant.inventory_quantity
-                      : 10
-                  ),
-                ].keys()
-              )
-                .slice(0, 10)
-                .map((i) => {
-                  const value = i + 1
-                  return (
-                    <option value={value} key={i}>
-                      {value}
-                    </option>
-                  )
-                })}
-            </CartItemSelect>
-          </div>
-        </Table.Cell>
-      )}
-
-      {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
+        <div className="flex flex-col pt-1">
+          <p className="p2-mobile-semi xsmall:p2-desktop-semi">{item.title}</p>
           <LineItemUnitPrice item={item} region={region} style="tight" />
-        </Table.Cell>
-      )}
-
-      <Table.Cell className="!pr-0">
-        <span
-          className={clx("!pr-0", {
-            "flex flex-col items-end h-full justify-center": type === "preview",
+        </div>
+      </div>
+      <div className="flex gap-[11px] px-[4px] py-[5px] min-w-[70px] h-fit border border-solid border-neutral-5 rounded-full pt-1">
+        <button onClick={() =>
+          updateItem({
+            lineId: item.id,
+            quantity: item.quantity - 1,
           })}
         >
-          {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-ui-fg-muted">{item.quantity}x </Text>
-              <LineItemUnitPrice item={item} region={region} style="tight" />
-            </span>
-          )}
-          <LineItemPrice item={item} region={region} style="tight" />
-        </span>
-      </Table.Cell>
-    </Table.Row>
+          <Image
+            src="/icons/remove-item.svg"
+            alt="remove item icon"
+            width="16"
+            height="16"
+          />
+        </button>
+        <h6 className="h6-mobile-bold text-neutral-5">{item.quantity}</h6>
+        <button onClick={() => updateItem({
+            lineId: item.id,
+            quantity: item.quantity + 1,
+          })}
+        >
+          <Image
+            src="/icons/add-item.svg"
+            alt="add item icon"
+            width="16"
+            height="16"
+          />
+        </button>
+      </div>
+    </div>
   )
 }
 

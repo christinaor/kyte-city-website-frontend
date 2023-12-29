@@ -1,13 +1,14 @@
 import React, { useMemo } from "react"
 import { medusaClient } from "@lib/config"
 import { Cart } from "@medusajs/medusa"
-import { Button, Label, Tooltip, Text, Heading } from "@medusajs/ui"
+import { Button, Label, Tooltip } from "@medusajs/ui"
 import { InformationCircleSolid } from "@medusajs/icons"
 import Input from "@modules/common/components/input"
 import Trash from "@modules/common/icons/trash"
 import { formatAmount, useCart, useUpdateCart } from "medusa-react"
 import { useForm } from "react-hook-form"
 import { useMutation } from "@tanstack/react-query"
+import clsx from "clsx"
 
 type DiscountFormValues = {
   discount_code: string
@@ -122,9 +123,9 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full flex flex-col">
       <div className="txt-medium">
-        {gift_cards.length > 0 && (
+        {/* {gift_cards.length > 0 && (
           <div className="flex flex-col mb-4">
             <Heading className="txt-medium">Gift card(s) applied:</Heading>
             {gift_cards?.map((gc) => (
@@ -150,18 +151,20 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               </div>
             ))}
           </div>
-        )}
+        )} */}
 
-        {appliedDiscount ? (
-          <div className="w-full flex items-center">
-            <div className="flex flex-col w-full">
-              <Heading className="txt-medium">Discount applied:</Heading>
-              <div className="flex items-center justify-between w-full max-w-full">
-                <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
-                  <span>Code:</span>
-                  <span className="truncate">{discounts[0].code}</span>
-                  <span className="min-w-fit">({appliedDiscount})</span>
-                </Text>
+        <form onSubmit={handleSubmit(onApply)} className="w-full">
+          <div className="flex justify-between items-center">
+            <Label className="flex items-center gap-x-1 mb-2">
+              <span className="p1-mobile-light text-main-1">Add a promo code</span>
+              <Tooltip content="You can add multiple gift cards, but only one discount code.">
+                <InformationCircleSolid color="var(--fg-muted)" />
+              </Tooltip>
+            </Label>
+            
+            {appliedDiscount && (
+              <div className="flex gap-1">
+                <span className="min-w-fit p1-mobile-light text-main-1">{appliedDiscount}</span>
                 <button
                   className="flex items-center"
                   onClick={onRemove}
@@ -173,36 +176,30 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   </span>
                 </button>
               </div>
-            </div>
+            )}
           </div>
-        ) : (
-          <form onSubmit={handleSubmit(onApply)} className="w-full">
-            <Label className="flex gap-x-1 mb-2">
-              Gift card or discount code?
-              <Tooltip content="You can add multiple gift cards, but only one discount code.">
-                <InformationCircleSolid color="var(--fg-muted)" />
-              </Tooltip>
-            </Label>
-            <div className="flex w-full gap-x-2 items-center">
-              <Input
-                label="Please enter code"
-                {...register("discount_code", {
-                  required: "Code is required",
-                })}
-                errors={errors}
-              />
 
-              <Button
-                type="submit"
-                variant="secondary"
-                className="!min-h-[0] h-10"
-                isLoading={isLoading}
-              >
-                Apply
-              </Button>
-            </div>
-          </form>
-        )}
+          <div className="flex gap-4 pt-2 pb-4 w-full h-stetch border-b border-b-neutral-5">
+            <Input
+              label="Promo code"
+              {...register("discount_code", {
+                required: "Code is required",
+              })}
+              errors={errors}
+            />
+            <Button
+              type="submit"
+              variant="transparent"
+              // className="!min-h-[0] h-10"
+              className={clsx("flex justify-center items-center px-5 py-1 w-[70px] border border-solid border-main-1 rounded-sm bg-main-1 text-main-2 micro-mobile-bold uppercase", {
+                "bg-neutral-5 border-neutral-5 text-main-2": appliedDiscount
+              })}
+              isLoading={isLoading}
+            >
+              {appliedDiscount ? "applied" : "apply"}
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   )

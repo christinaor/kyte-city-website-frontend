@@ -4,10 +4,10 @@ import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
 import SkeletonCartPage from "@modules/skeletons/templates/skeleton-cart-page"
 import { useCart, useMeCustomer } from "medusa-react"
 import EmptyCartMessage from "../components/empty-cart-message"
-import SignInPrompt from "../components/sign-in-prompt"
 import ItemsTemplate from "./items"
+import DiscountCode from "@modules/checkout/components/discount-code"
 import Summary from "./summary"
-import Divider from "@modules/common/components/divider"
+import CheckoutButtons from "./checkout-buttons"
 
 const CartTemplate = () => {
   const { cart } = useCart()
@@ -20,30 +20,16 @@ const CartTemplate = () => {
 
   return (
     <div className="py-12">
-      <div className="content-container">
+      <div className="content-container flex justify-center">
         {cart.items.length ? (
-          <div className="grid grid-cols-1 small:grid-cols-[1fr_360px] gap-x-40">
-            <div className="flex flex-col bg-white p-6 gap-y-6">
-              {!customer && (
-                <>
-                  <SignInPrompt />
-                  <Divider />
-                </>
-              )}
-
+          <div className="grid grid-cols-1 w-full xsmall:max-w-[460px] small:max-w-[770px] gap-x-40">
+            <h5 className="py-6 h5-mobile-semi">Shopping Bag</h5>
+            <div className="flex flex-col gap-y-6">
               <ItemsTemplate region={cart?.region} items={items} />
+              <DiscountCode cart={cart} />
             </div>
-            <div className="relative">
-              <div className="flex flex-col gap-y-8 sticky top-12">
-                {cart && cart.region && (
-                  <>
-                    <div className="bg-white p-6">
-                      <Summary cart={cart} />
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
+            <Summary data={cart} />
+            <CheckoutButtons customer={customer} />
           </div>
         ) : (
           <div>

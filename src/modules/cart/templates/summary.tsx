@@ -1,26 +1,42 @@
-import { Cart } from "@medusajs/medusa"
-import { Button, Heading } from "@medusajs/ui"
-import DiscountCode from "@modules/checkout/components/discount-code"
-import CartTotals from "@modules/common/components/cart-totals"
-import Divider from "@modules/common/components/divider"
-import Link from "next/link"
+import { Cart, Order } from "@medusajs/medusa"
+import { Label, Tooltip } from "@medusajs/ui"
+import { InformationCircleSolid } from "@medusajs/icons"
+import { formatAmount } from "medusa-react"
+import React from "react"
 
 type SummaryProps = {
-  cart: Omit<Cart, "refundable_amount" | "refunded_total">
+  data: Omit<Cart, "refundable_amount" | "refunded_total"> | Order
 }
 
-const Summary = ({ cart }: SummaryProps) => {
+const Summary: React.FC<SummaryProps> = ({ data }) => {
+  const {
+    total,
+  } = data
+
+  const getAmount = (amount: number | null | undefined) => {
+    return formatAmount({
+      amount: amount || 0,
+      region: data.region,
+      includeTaxes: false,
+    })
+  }
+
   return (
-    <div className="flex flex-col gap-y-4">
-      <Heading level="h2" className="text-[2rem] leading-[2.75rem]">
-        Summary
-      </Heading>
-      <DiscountCode cart={cart} />
-      <Divider />
-      <CartTotals data={cart} />
-      <Link href="/checkout">
-        <Button className="w-full h-10">Go to checkout</Button>
-      </Link>
+    <div>
+      <div className="flex justify-between items-center gap-3 pt-3">
+        <Label className="flex items-center gap-x-1 mb-2 p1-mobile-light text-main-1">
+          <span className="p1-mobile-light text-main-1">Delivery Fee</span>
+          <Tooltip content="You can add multiple gift cards, but only one discount code.">
+            <InformationCircleSolid color="var(--fg-muted)" />
+          </Tooltip>
+        </Label>
+        <span className="text-mobile-light-italic text-neutral-5">Calculated at next step</span>
+      </div>
+
+      <div className="flex items-center justify-between p1-mobile-semi mb-2">
+        <span>Total</span>
+        <span>{getAmount(total)}</span>
+      </div>
     </div>
   )
 }
